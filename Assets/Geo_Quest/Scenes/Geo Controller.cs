@@ -47,7 +47,7 @@ public class GeoController : MonoBehaviour
         transform.position += new Vector3(0, -1, 0); }
         
     }*/
-        OnCollisionEnter2D(Collision2D collision) 
+        OnTriggerEnter2D(Collision2D collision) 
     }
 }
 
