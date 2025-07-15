@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5266006307940157177}
   - component: {fileID: 9066012117960859849}
   m_Layer: 0
-  m_Name: Bounce Pad
+  m_Name: Bomb
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
