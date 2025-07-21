@@ -4,7 +4,6 @@ using System.Diagnostics.Contracts;
 using System.Runtime.CompilerServices;
 using System.Transactions;
 using Unity.VisualScripting;
-using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
@@ -43,7 +42,7 @@ public class GeoController : MonoBehaviour
         rb.velocity = new Vector2(xInput * fast,  rb.velocity.y);
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            rbSprite.color = Color.grey;
+            rbSprite.color = Color.white;
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
