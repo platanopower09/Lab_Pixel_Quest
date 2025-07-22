@@ -7,6 +7,7 @@ public class Player_Stats : MonoBehaviour
 {
     public string NextLevel = "Scene_2";
     public int coinCount  = 0;
+    public int _health = 3;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         switch (collision.tag)
@@ -28,6 +29,12 @@ public class Player_Stats : MonoBehaviour
             case "Coin":
                 {
                     coinCount++;
+                    Destroy(collision.gameObject);
+                    break;
+                }
+            case "Health":
+                {
+                    _health++;
                     Destroy(collision.gameObject);
                     break;
                 }
