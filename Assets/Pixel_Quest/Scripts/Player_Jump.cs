@@ -6,8 +6,11 @@ using UnityEngine;
 public class Player_Jump : MonoBehaviour
 {
     private Rigidbody2D _rigidbody2D;
+   
+    // Forces
     public float jumpForce = 10f;
-    
+    public float fallForce = 2;
+
     // Capsule 
     public float CapsuleHeight = 0.25f;
     public float CapsuleRadius = 0.08f;
@@ -16,20 +19,41 @@ public class Player_Jump : MonoBehaviour
     public Transform feetCollider;
     public LayerMask groundMask;
     private bool _groundCheck;
-    private bool waterCheck;
-    public float fallForce = 2;
-    private Vector2 _gravityVector;
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag(_waterTag)) { waterCheck = true; }
+    }
+
+    // Check if player left water
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag(_waterTag)) { waterCheck = false; }
+    }
+    // Water Check 
+
+    private bool waterCheck;
+    private string _waterTag = "Water";
+    
+    private Vector2 gravity;
+    public Rigidbody2D rb;
+
+   //Sets gravity vector and connects components
     private void Start()
     {
-        _gravityVector = new Vector2(0, Physics2D.gravity.y);
+        gravity = new Vector2(0f, Physics2D.gravity.y);
+        
         _rigidbody2D = GetComponent<Rigidbody2D>();
+       
+        if (rb == null) ;
+       
+        rb = GetComponent<Rigidbody2D>();
+
+
     }
 
-    private int GetGroundMask()
-    {
-        return groundMask;
-    }
+
 
     private void Update()
     {
@@ -40,6 +64,21 @@ public class Player_Jump : MonoBehaviour
  
 
                 _rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x, jumpForce);
+
+            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+
+           // Checks if the gravity should be getting faster 
+
+            if (rb.velocity.y > 0) ;
+
+            rb.velocity += fallForce * Time.deltaTime * gravity;
+
+         
+
+
+
+    
+
                
             
         }

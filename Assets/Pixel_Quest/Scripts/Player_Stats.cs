@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class Player_Stats : MonoBehaviour
 {
     public string NextLevel = "Scene_2";
+    public int coinCount  = 0;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         switch (collision.tag)
@@ -21,7 +22,18 @@ public class Player_Stats : MonoBehaviour
                 {
                     SceneManager.LoadScene(NextLevel);
                     break;
+
+                    
                 }
+            case "Coin":
+                {
+                    coinCount++;
+                    Destroy(collision.gameObject);
+                    break;
+                }
+
+
+           
         }
 
     }
