@@ -22,33 +22,30 @@ public class Player_Jump : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag(_waterTag)) { waterCheck = true; }
+        if (collision.CompareTag(_waterTag)) { _waterCheck = true; }
     }
 
     // Check if player left water
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.CompareTag(_waterTag)) { waterCheck = false; }
+        if (collision.CompareTag(_waterTag)) { _waterCheck = false; }
     }
     // Water Check 
 
-    private bool waterCheck;
+    private bool _waterCheck;
     private string _waterTag = "Water";
     
-    private Vector2 gravity;
+    private Vector2 _gravityVector;
     public Rigidbody2D rb;
 
    //Sets gravity vector and connects components
     private void Start()
     {
-        gravity = new Vector2(0f, Physics2D.gravity.y);
+        _gravityVector = new Vector2(0f, Physics2D.gravity.y);
         
         _rigidbody2D = GetComponent<Rigidbody2D>();
        
-        if (rb == null) ;
-       
-        rb = GetComponent<Rigidbody2D>();
 
 
     }
@@ -58,22 +55,21 @@ public class Player_Jump : MonoBehaviour
     private void Update()
     {
         _groundCheck = Physics2D.OverlapCapsule(feetCollider.position, new Vector2(CapsuleHeight, CapsuleRadius), CapsuleDirection2D.Horizontal, 0, groundMask);
-        if (Input.GetKeyDown(KeyCode.Space)&& _groundCheck)
-        {
+        if (Input.GetKeyDown(KeyCode.Space) && (_groundCheck || _waterCheck))
+              {
 
- 
 
-                _rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x, jumpForce);
 
-            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+            _rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x, jumpForce);
+        }
+            // Checks if the gravity should be getting faster 
 
-           // Checks if the gravity should be getting faster 
+            if (rb.velocity.y > 0 && !_waterCheck)
+            {
 
-            if (rb.velocity.y > 0) ;
-
-            rb.velocity += fallForce * Time.deltaTime * gravity;
-
-         
+            _rigidbody2D.velocity += _gravityVector * (fallForce * Time.deltaTime);
+        }
+        
 
 
 
@@ -81,7 +77,7 @@ public class Player_Jump : MonoBehaviour
 
                
             
-        }
-
+       
+       
     }
 }
