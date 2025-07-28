@@ -58,8 +58,9 @@ public class Player_Stats : MonoBehaviour
             case "Coin":
                 {
                     coinCount++;
-              
-                    Destroy(collision.gameObject);
+                    _player_UIController.UpdateText(coinCount + "/" + CoinsInLevel);
+                
+                Destroy(collision.gameObject);
                     break;
                 }
             case "Health":
