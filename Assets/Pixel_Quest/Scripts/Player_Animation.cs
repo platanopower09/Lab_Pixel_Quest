@@ -7,7 +7,6 @@ using UnityEngine;
 public class PlayerAnimationController : MonoBehaviour
 {
     private Animator _animator;
-
     private Rigidbody2D _rigidbody2D;
 
 

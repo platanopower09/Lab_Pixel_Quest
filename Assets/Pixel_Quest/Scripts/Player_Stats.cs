@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -11,12 +12,21 @@ public class Player_Stats : MonoBehaviour
     public Transform respawnPoint;
     public int _maxHealth = 3;
     private Player_UIController _player_UIController;
+    private Player_UIController playui;
+    public int CoinsInLevel = 0;
+
+
+    private void Start()
+    {
+        _player_UIController = GetComponent<Player_UIController>();
+        playui.StartUI();
+        CoinsInLevel = GameObject.Find("Coins").transform.childCount;
+        _player_UIController.UpdateHealth(_health, _maxHealth);
+        _player_UIController.UpdateText(coinCount + "/" + CoinsInLevel);
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
-    { 
-        _player_UIController = GetComponent<Player_UIController>();
-        _player_UIController.UpdateHealth(_health, _maxHealth);
-            
+    {
         switch (collision.tag)
         {
             case "Death":
@@ -48,6 +58,7 @@ public class Player_Stats : MonoBehaviour
             case "Coin":
                 {
                     coinCount++;
+              
                     Destroy(collision.gameObject);
                     break;
                 }
@@ -83,7 +94,8 @@ public class Player_Stats : MonoBehaviour
 
 
 
-}
+} 
+
     
   
 
